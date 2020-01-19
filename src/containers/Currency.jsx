@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { GlobalStyle, AppWrapper, Error, Loading } from '../components/styles'
 import { SelectCurrency } from '../components/Select'
 import DateRangePickerWrapper from '../components/DatePicker'
+import Loader from '../components/Loader'
 import FullScreenDialog from '../components/Dialogue'
 import FloatingActionButtonZoom from '../components/FloatingActionButton'
 import StickyHeadTable from '../components/Table'
@@ -74,7 +75,11 @@ function Currency({
         <GlobalStyle />
         {error && <Error>{error.message}</Error>}
         {!isCurrencyLoaded ||
-          (!isRateFetched && !error && <Loading>Loading...</Loading>)}
+          (!isRateFetched && !error && (
+            <Loading>
+              <Loader />
+            </Loading>
+          ))}
         {isCurrencyLoaded && isRateFetched && (
           <AppWrapper>
             <Grid container spacing={3}>
