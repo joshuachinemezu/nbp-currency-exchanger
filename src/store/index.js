@@ -1,9 +1,28 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers'
+import * as moment from 'moment'
 
 const initialState = {
-  currency: {}
+  currency: {
+    currencyList: {
+      data: {},
+      error: '',
+      to: 0,
+      from: 0
+    },
+    rate: {
+      data: {},
+      error: '',
+      to: 0,
+      from: 0
+    },
+    activeCurrency: 'EUR',
+    isCurrencyLoaded: false,
+    isRateFetched: false,
+    rateFromDate: moment().subtract(2, 'days'),
+    rateToDate: moment().subtract(1, 'days')
+  }
 }
 const middleware = [thunk]
 
