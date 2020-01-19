@@ -13,6 +13,10 @@ import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box'
+import { yellow } from '@material-ui/core/colors'
+
+import Star from '@material-ui/icons/Star'
+import StarBorder from '@material-ui/icons/StarBorder'
 
 import {
   getCurrencyRate,
@@ -79,9 +83,22 @@ function Currency({
                   <SelectCurrency
                     value={currentCurrency}
                     onChange={(e) => currencyChange(e.target.value)}
-                    favoriteAction={(e) => favoriteAction(e.target.value)}
                     currencyList={currencyList}
                   />
+                  <Box component='span' pt={20}>
+                    {currencyFavorites.includes(currentCurrency) ? (
+                      <Star
+                        onClick={() => favoriteAction()}
+                        style={{ cursor: 'pointer', color: yellow[800] }}
+                      />
+                    ) : (
+                      <StarBorder
+                        color='disabled'
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => favoriteAction()}
+                      />
+                    )}
+                  </Box>
                 </Paper>
               </Grid>
               <Grid item md={6}>

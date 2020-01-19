@@ -83,4 +83,5 @@ export const Error = styled.div`
 export const Loading = styled.div`
   text-align: center;
   padding: 1rem;
+  margin-top: 10rem;
 `

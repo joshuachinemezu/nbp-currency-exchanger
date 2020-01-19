@@ -52,8 +52,10 @@ export default function(state, { type, payload }) {
     case CURRENCY_FAVORITES:
       return {
         ...state,
-        currencyFavorites: payload
+        currencyFavorites:
+          payload || JSON.parse(localStorage.getItem('favorites'))
       }
+
     case CURRENCY_FAVORITE_DIALOGUE:
       return {
         ...state,

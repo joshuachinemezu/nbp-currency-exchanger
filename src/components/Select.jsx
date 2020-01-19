@@ -5,8 +5,6 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import InputBase from '@material-ui/core/InputBase'
-import StarBorder from '@material-ui/icons/StarBorder'
-import Box from '@material-ui/core/Box'
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
@@ -44,35 +42,22 @@ const BootstrapInput = withStyles((theme) => ({
   }
 }))(InputBase)
 
-export const SelectCurrency = ({
-  value,
-  onChange,
-  favoriteAction,
-  currencyList = []
-}) => (
-  <div>
-    <FormControl>
-      <InputLabel id=''>Currency</InputLabel>
+export const SelectCurrency = ({ value, onChange, currencyList = [] }) => (
+  <FormControl>
+    <InputLabel id=''>Currency</InputLabel>
 
-      <Select
-        labelId=''
-        id=''
-        value={value}
-        onChange={onChange}
-        input={<BootstrapInput />}
-      >
-        {currencyList.map((currency) => (
-          <MenuItem key={currency.code} value={currency.code}>
-            {currency.code}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
-    <Box onClick={favoriteAction} component='span' pt={20}>
-      <StarBorder />
-    </Box>
-    {/* <span onClick={favoriteAction} pt={20}>
-      <StarBorder />
-    </span> */}
-  </div>
+    <Select
+      labelId=''
+      id=''
+      value={value}
+      onChange={onChange}
+      input={<BootstrapInput />}
+    >
+      {currencyList.map((currency) => (
+        <MenuItem key={currency.code} value={currency.code}>
+          {currency.code}
+        </MenuItem>
+      ))}
+    </Select>
+  </FormControl>
 )

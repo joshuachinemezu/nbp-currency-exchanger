@@ -33,7 +33,6 @@ export default function FullScreenDialog(props) {
   let handleClose = props.handleClose
   let favorites = props.favorites
   let open = props.open
-  let removeFavorite = props.removeFavorite
 
   return (
     <div>
@@ -64,8 +63,7 @@ export default function FullScreenDialog(props) {
                 <ListItemText primary={favorite} />
                 <IconButton
                   color='inherit'
-                  onClick={removeFavorite(favorite)}
-                  aria-label='close'
+                  onClick={() => props.removeFavorite(favorite)}
                 >
                   <DeleteIcon />
                 </IconButton>

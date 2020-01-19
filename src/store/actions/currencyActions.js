@@ -79,10 +79,9 @@ export const currencyFavorite = () => async (dispatch, getState) => {
   let currency = getState().currency.activeCurrency
 
   // Remove currency if exists or add to favorites if it does not exit
-  if (storedFavorites.includes(currency)) {
-    var index = storedFavorites.indexOf(currency)
-    if (index !== -1) storedFavorites.splice(index, 1)
-  } else storedFavorites.push(currency)
+  var index = storedFavorites.indexOf(currency)
+  if (index !== -1) storedFavorites.splice(index, 1)
+  else storedFavorites.push(currency)
 
   localStorage.setItem('favorites', JSON.stringify(storedFavorites))
 
@@ -97,10 +96,9 @@ export const currencyFavorite = () => async (dispatch, getState) => {
  * @returns {Function}
  *
  */
-export const removeFavorite = (currency) => async (dispatch, getState) => {
+export const removeFavorite = (currency) => async (dispatch) => {
   var storedFavorites = JSON.parse(localStorage.getItem('favorites')) || []
-
-  // Remove currency if exists or add to favorites if it does not exit
+  // Remove currency if exists
   if (storedFavorites.includes(currency)) {
     var index = storedFavorites.indexOf(currency)
     if (index !== -1) storedFavorites.splice(index, 1)
