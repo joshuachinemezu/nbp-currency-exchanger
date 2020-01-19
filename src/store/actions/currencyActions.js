@@ -12,15 +12,6 @@ import {
   CURRENCY_FAVORITE_DIALOGUE
 } from './types'
 
-import * as moment from 'moment'
-
-const YESTERDAY = moment()
-  .subtract(2, 'days')
-  .format('YYYY-MM-DD')
-const TODAY = moment()
-  .subtract(1, 'days')
-  .format('YYYY-MM-DD')
-
 /**
  * @description Action responsible for error handling
  * @param payload
@@ -113,6 +104,22 @@ export const removeFavorite = (currency) => async (dispatch) => {
 }
 
 /**
+ * @description Action responsible for removing all currency favorites
+ * @returns {Function}
+ *
+ */
+export const removeAllFavorite = () => async (dispatch) => {
+  var storedFavorites = []
+
+  localStorage.setItem('favorites', JSON.stringify(storedFavorites))
+
+  dispatch({
+    type: CURRENCY_FAVORITES,
+    payload: storedFavorites
+  })
+}
+
+/**
  * @param payload
  * @returns {Function}
  */
@@ -128,10 +135,10 @@ export const currencyChange = (payload) => async (dispatch) => {
  *
  * @returns {Function}
  */
-export const getCurrencies = (fromDate = YESTERDAY, toDate = TODAY) => async (
-  dispatch
-) => {
+export const getCurrencies = () => async (dispatch, getState) => {
   try {
+    const fromDate = getState().currency.rateFromDate.format('YYYY-MM-DD')
+    const toDate = getState().currency.rateToDate.format('YYYY-MM-DD')
     const { data } = await fetchCurrencies(fromDate, toDate)
     dispatch({
       type: FETCH_CURRENCY,
@@ -165,24 +172,3 @@ export const getCurrencyRate = () => async (dispatch, getState) => {
     dispatch(handleError(error))
   }
 }
-
-/**
- * @param payload
- * @returns {Function}
- */
-// export const dateChange = (payload) => async (dispatch) => {
-//   dispatch({
-//     type: CURRENCY_DATE_CHANGED,
-//     payload: true
-//   })
-//   fetchCurrencyRate(payload)
-//     .then((res) => {
-//       dispatch({
-//         type: CURRENCY_CHANGE,
-//         payload: res.data
-//       })
-//     })
-//     .catch((error) => {
-//       dispatch(handleError(error))
-//     })
-// }

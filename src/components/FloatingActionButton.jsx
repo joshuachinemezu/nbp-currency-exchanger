@@ -10,7 +10,7 @@ import { green } from '@material-ui/core/colors'
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    width: 500,
+    width: 'auto',
     position: 'relative',
     minHeight: 200
   },
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     textAlign: 'right',
     bottom: theme.spacing(5),
-    right: theme.spacing(8)
+    right: theme.spacing(3)
   },
   fabGreen: {
     color: theme.palette.common.white,

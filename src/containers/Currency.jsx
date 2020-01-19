@@ -27,7 +27,8 @@ import {
   currencyChange,
   currencyFavorite,
   favoriteDialogueChange,
-  removeFavorite
+  removeFavorite,
+  removeAllFavorite
 } from '../store/actions/currencyActions'
 
 const useStyles = makeStyles((theme) => ({
@@ -60,7 +61,8 @@ function Currency({
   dialogueClose,
   favoriteDialogue,
   currencyFavorites,
-  removeFavorite
+  removeFavorite,
+  removeAllFavoriteCurrency
 }) {
   useEffect(() => {
     getCurrencies()
@@ -142,6 +144,7 @@ function Currency({
             <FullScreenDialog
               favorites={currencyFavorites}
               removeFavorite={(currency) => removeFavorite(currency)}
+              removeAllFavorite={() => removeAllFavoriteCurrency()}
               open={favoriteDialogue}
               handleClickOpen={(e) => dialogueOpen(e.target.value)}
               handleClose={(e) => dialogueClose(e.target.value)}
@@ -191,6 +194,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   removeFavorite: (currency) => {
     dispatch(removeFavorite(currency))
+  },
+  removeAllFavoriteCurrency: () => {
+    dispatch(removeAllFavorite())
   }
 })
 

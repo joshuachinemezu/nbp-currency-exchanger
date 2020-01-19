@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography'
 import CloseIcon from '@material-ui/icons/Close'
 import Slide from '@material-ui/core/Slide'
 import DeleteIcon from '@material-ui/icons/Delete'
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -20,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
   title: {
     marginLeft: theme.spacing(2),
     flex: 1
+  },
+  empty: {
+    margin: theme.spacing(10),
+    textAlign: 'center'
   }
 }))
 
@@ -44,9 +49,6 @@ export default function FullScreenDialog(props) {
       >
         <AppBar className={classes.appBar}>
           <Toolbar>
-            <Typography variant='h6' className={classes.title}>
-              Favorites
-            </Typography>
             <IconButton
               color='inherit'
               onClick={handleClose}
@@ -54,25 +56,44 @@ export default function FullScreenDialog(props) {
             >
               <CloseIcon />
             </IconButton>
+            <Typography variant='h6' className={classes.title}>
+              Favorites
+            </Typography>
+            <Button
+              autoFocus
+              color='inherit'
+              onClick={(e) => {
+                props.removeAllFavorite()
+                handleClose(e)
+              }}
+            >
+              Remove All
+            </Button>
           </Toolbar>
         </AppBar>
-        <List>
-          {favorites.map((favorite, index) => (
-            <div key={index}>
-              <ListItem button>
-                <ListItemText primary={favorite} />
-                <IconButton
-                  color='inherit'
-                  onClick={() => props.removeFavorite(favorite)}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </ListItem>
+        {favorites.length > 0 ? (
+          <List>
+            {favorites.map((favorite, index) => (
+              <div key={index}>
+                <ListItem button>
+                  <ListItemText primary={favorite} />
+                  <IconButton
+                    color='inherit'
+                    onClick={() => props.removeFavorite(favorite)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItem>
 
-              <Divider />
-            </div>
-          ))}
-        </List>
+                <Divider />
+              </div>
+            ))}
+          </List>
+        ) : (
+          <Typography variant='h6' className={classes.empty}>
+            No Favorite Currency
+          </Typography>
+        )}
       </Dialog>
     </div>
   )
