@@ -3,7 +3,9 @@ import {
   HANDEL_ERROR,
   FETCH_CURRENCY_RATE,
   ACTIVE_CURRENCY,
-  IS_LOADING_CURRENCY_RATE
+  IS_LOADING_CURRENCY_RATE,
+  CURRENCY_START_DATE_CHANGED,
+  CURRENCY_END_DATE_CHANGED
 } from '../actions/types'
 
 export default function(state, { type, payload }) {
@@ -34,6 +36,16 @@ export default function(state, { type, payload }) {
       return {
         ...state,
         error: payload
+      }
+    case CURRENCY_START_DATE_CHANGED:
+      return {
+        ...state,
+        rateFromDate: payload
+      }
+    case CURRENCY_END_DATE_CHANGED:
+      return {
+        ...state,
+        rateToDate: payload
       }
 
     default:
