@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers'
-import * as moment from 'moment'
+import moment from 'moment'
 
 const initialState = {
   currency: {
