@@ -7,15 +7,11 @@ const initialState = {
   currency: {
     currencyList: {
       data: {},
-      error: '',
-      to: 0,
-      from: 0
+      error: ''
     },
     rate: {
       data: {},
-      error: '',
-      to: 0,
-      from: 0
+      error: ''
     },
     activeCurrency: 'EUR',
     isCurrencyLoaded: false,
