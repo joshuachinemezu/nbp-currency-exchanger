@@ -25,6 +25,7 @@ const propTypes = {
   autoFocus: PropTypes.bool,
   autoFocusEndDate: PropTypes.bool,
   stateDateWrapper: PropTypes.func,
+  onStartEndChange: PropTypes.func,
   initialStartDate: momentPropTypes.momentObj,
   initialEndDate: momentPropTypes.momentObj,
 
@@ -124,8 +125,8 @@ class DateRangePickerWrapper extends React.Component {
       startDate: startDate && stateDateWrapper(startDate),
       endDate: endDate && stateDateWrapper(endDate),
     });
-    this.props.onChangeStartDate(startDate)
-    this.props.onChangeEndDate(endDate)
+    this.props.onStartEndChange({startDate, endDate})
+    // this.props.onChangeEndDate(endDate)
 
   }
 
@@ -145,6 +146,7 @@ class DateRangePickerWrapper extends React.Component {
       'initialStartDate',
       'initialEndDate',
       'stateDateWrapper',
+      'onStartEndChange'
     ]);
 
     return (

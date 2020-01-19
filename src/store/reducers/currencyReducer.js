@@ -5,7 +5,9 @@ import {
   ACTIVE_CURRENCY,
   IS_LOADING_CURRENCY_RATE,
   CURRENCY_START_DATE_CHANGED,
-  CURRENCY_END_DATE_CHANGED
+  CURRENCY_END_DATE_CHANGED,
+  CURRENCY_FAVORITES,
+  CURRENCY_FAVORITE_DIALOGUE
 } from '../actions/types'
 
 export default function(state, { type, payload }) {
@@ -46,6 +48,16 @@ export default function(state, { type, payload }) {
       return {
         ...state,
         rateToDate: payload
+      }
+    case CURRENCY_FAVORITES:
+      return {
+        ...state,
+        currencyFavorites: payload
+      }
+    case CURRENCY_FAVORITE_DIALOGUE:
+      return {
+        ...state,
+        favoriteDialogue: payload
       }
 
     default:

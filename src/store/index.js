@@ -21,7 +21,9 @@ const initialState = {
     isCurrencyLoaded: false,
     isRateFetched: false,
     rateFromDate: moment().subtract(2, 'days'),
-    rateToDate: moment().subtract(1, 'days')
+    rateToDate: moment().subtract(1, 'days'),
+    currencyFavorites: JSON.parse(localStorage.getItem('favorites')) || [],
+    favoriteDialogue: false
   }
 }
 const middleware = [thunk]
