@@ -33,31 +33,23 @@ export const favoriteDialogueChange = (payload) => ({
 })
 
 /**
- * @description Action responsible for start date change
+ * @description Action responsible for  date change
  * @param payload
  * @returns {Function}
  *
  */
-export const startDateChange = (payload) => async (dispatch) => {
+export const dateChange = (payload) => async (dispatch, getState) => {
   dispatch({
     type: CURRENCY_START_DATE_CHANGED,
-    payload: payload
+    payload: payload.startDate
   })
-  getCurrencyRate()
-}
-
-/**
- * @description Action responsible for end date change
- * @param payload
- * @returns {Function}
- *
- */
-export const endDateChange = (payload) => async (dispatch) => {
   dispatch({
     type: CURRENCY_END_DATE_CHANGED,
-    payload: payload
+    payload: payload.endDate
   })
-  getCurrencyRate()
+
+  if (payload.startDate != null && payload.endDate != null)
+    dispatch(getCurrencyRate(getState().currency.activeCurrency))
 }
 
 /**
@@ -155,7 +147,6 @@ export function getCurrencyRate(currency) {
 
     let fromDate = getState().currency.rateFromDate.format('YYYY-MM-DD')
     let toDate = getState().currency.rateToDate.format('YYYY-MM-DD')
-    if (fromDate == null && toDate == null) return null
 
     const request = fetchCurrencyRate(currency, fromDate, toDate)
 

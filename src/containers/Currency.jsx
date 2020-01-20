@@ -21,8 +21,7 @@ import Favorite from '@material-ui/icons/Favorite'
 
 import {
   getCurrencies,
-  startDateChange,
-  endDateChange,
+  dateChange,
   currencyFavorite,
   favoriteDialogueChange,
   removeAllFavorite,
@@ -44,10 +43,7 @@ const useStyles = makeStyles((theme) => ({
 function Currency() {
   const currency = useSelector((state) => state.currency)
 
-  const dateChange = (payload) => {
-    dispatch(startDateChange(payload.startDate))
-    dispatch(endDateChange(payload.endDate))
-  }
+  
 
   const {
     currencyFavorites,
@@ -121,7 +117,7 @@ function Currency() {
                     initialEndDate={rateToDate}
                     endDateId='unique_end_dedd3423date_id'
                     onStartEndChange={({ startDate, endDate }) =>
-                      dateChange({ startDate, endDate })
+                      dispatch(dateChange({ startDate, endDate }))
                     }
                     // onChangeStartDate={onChangeStartDate}
                     // onChangeEndDate={onChangeEndDate}
