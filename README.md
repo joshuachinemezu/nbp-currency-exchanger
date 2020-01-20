@@ -1,5 +1,5 @@
 <h1 align="center">
-  	 Currnecy Exchange Rate Tracker
+  	 Currency Exchange Rate Tracker
 </h1>
 
 <p align="center">
@@ -12,7 +12,7 @@
   <b>✨ React and redux app using <a href="http://api.nbp.pl/">Narodowy Bank Exchange API</a> ✨<b>
   </br>
  </br>
-  <img src="public/exchanger.gif" alt="Currnecy Converter" />
+  <img src="public/exchanger.gif" alt="Currency Converter" />
   </br> 
 </p>
 
