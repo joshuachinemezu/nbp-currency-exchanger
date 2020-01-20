@@ -70,9 +70,9 @@ function Currency({
   const classes = useStyles()
 
   return (
-    <Fragment>
-      <CssBaseline />
-      <Container>
+    <Container>
+      <Fragment>
+        <CssBaseline />
         <GlobalStyle />
         {error && <Error>{error.message}</Error>}
         {!isCurrencyLoaded ||
@@ -150,8 +150,8 @@ function Currency({
             />
           </AppWrapper>
         )}
-      </Container>
-    </Fragment>
+      </Fragment>
+    </Container>
   )
 }
 
