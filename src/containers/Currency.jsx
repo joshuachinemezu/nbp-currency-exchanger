@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect } from 'react'
-import { connect } from 'react-redux'
 
 import { GlobalStyle, AppWrapper, Error, Loading } from '../components/styles'
 import { SelectCurrency } from '../components/Select'
@@ -15,19 +14,20 @@ import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box'
 import { red } from '@material-ui/core/colors'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import Favorite from '@material-ui/icons/Favorite'
 
 import {
-  getCurrencyRate,
   getCurrencies,
   startDateChange,
   endDateChange,
-  currencyChange,
   currencyFavorite,
   favoriteDialogueChange,
+  removeAllFavorite,
   removeFavorite,
-  removeAllFavorite
+  getCurrencyRate
 } from '../store/actions/currencyActions'
 
 const useStyles = makeStyles((theme) => ({
@@ -41,32 +41,34 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function Currency({
-  error,
-  isCurrencyLoaded,
-  getCurrencyRate,
-  getCurrencies,
-  currencyList,
-  currentCurrency,
-  currencyChange,
-  currencyRates,
-  isRateFetched,
-  rateFromDate,
-  rateToDate,
-  onFocusChange,
-  dateChange,
-  favoriteAction,
-  dialogueOpen,
-  dialogueClose,
-  favoriteDialogue,
-  currencyFavorites,
-  removeFavorite,
-  removeAllFavoriteCurrency
-}) {
+function Currency() {
+  const currency = useSelector((state) => state.currency)
+
+  const dateChange = (payload) => {
+    dispatch(startDateChange(payload.startDate))
+    dispatch(endDateChange(payload.endDate))
+  }
+
+  const {
+    currencyFavorites,
+    favoriteDialogue,
+    rateToDate,
+    rateFromDate,
+    isRateFetched,
+    activeCurrency,
+    isCurrencyLoaded,
+    error
+  } = { ...currency }
+
+  let currencyList = currency.currencyList.rates
+  let currencyRates = currency.rate
+
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    getCurrencies()
-    getCurrencyRate(currentCurrency)
-  }, [currentCurrency, getCurrencies, getCurrencyRate])
+    dispatch(getCurrencies())
+    dispatch(getCurrencyRate(activeCurrency))
+  }, [activeCurrency, dispatch])
   const classes = useStyles()
 
   return (
@@ -87,21 +89,21 @@ function Currency({
               <Grid item md={6}>
                 <Paper className={classes.paper}>
                   <SelectCurrency
-                    value={currentCurrency}
-                    onChange={(e) => currencyChange(e.target.value)}
+                    value={activeCurrency}
+                    onChange={(e) => dispatch(getCurrencyRate(e.target.value))}
                     currencyList={currencyList}
                   />
                   <Box component='span' pt={20}>
-                    {currencyFavorites.includes(currentCurrency) ? (
+                    {currencyFavorites.includes(activeCurrency) ? (
                       <Favorite
-                        onClick={() => favoriteAction()}
+                        onClick={() => dispatch(currencyFavorite())}
                         style={{ cursor: 'pointer', color: red[700] }}
                       />
                     ) : (
                       <Favorite
                         color='disabled'
                         style={{ cursor: 'pointer' }}
-                        onClick={() => favoriteAction()}
+                        onClick={() => dispatch(currencyFavorite())}
                       />
                     )}
                   </Box>
@@ -124,9 +126,6 @@ function Currency({
                     // onChangeStartDate={onChangeStartDate}
                     // onChangeEndDate={onChangeEndDate}
                     focusedInput={null}
-                    onFocusChange={(focusedInput) =>
-                      onFocusChange({ focusedInput })
-                    }
                   />
                 </Paper>
               </Grid>
@@ -134,19 +133,21 @@ function Currency({
 
             <Box mx='auto' bgcolor='background.paper' mt={10} p={1}>
               <StickyHeadTable
-                data={currencyRates}
-                currency={currentCurrency}
+                data={currencyRates.rates}
+                currency={activeCurrency}
               />
             </Box>
 
-            <FloatingActionButtonZoom showModal={() => dialogueOpen()} />
+            <FloatingActionButtonZoom
+              showModal={() => dispatch(favoriteDialogueChange(true))}
+            />
             <FullScreenDialog
               favorites={currencyFavorites}
-              removeFavorite={(currency) => removeFavorite(currency)}
-              removeAllFavorite={() => removeAllFavoriteCurrency()}
+              removeFavorite={(currency) => dispatch(removeFavorite(currency))}
+              removeAllFavorite={() => dispatch(removeAllFavorite())}
               open={favoriteDialogue}
-              handleClickOpen={(e) => dialogueOpen(e.target.value)}
-              handleClose={(e) => dialogueClose(e.target.value)}
+              handleClickOpen={() => dispatch(favoriteDialogueChange(true))}
+              handleClose={() => dispatch(favoriteDialogueChange(false))}
             />
           </AppWrapper>
         )}
@@ -155,48 +156,4 @@ function Currency({
   )
 }
 
-const mapStateToProps = ({ currency }) => ({
-  currencyList: currency.currencyList.rates,
-  currentCurrency: currency.activeCurrency,
-  isCurrencyLoaded: currency.isCurrencyLoaded,
-  currencyRates: currency.rate.rates,
-  rateFromDate: currency.rateFromDate,
-  rateToDate: currency.rateToDate,
-  error: currency.error,
-  isRateFetched: currency.isRateFetched,
-  currencyFavorites: currency.currencyFavorites,
-  favoriteDialogue: currency.favoriteDialogue
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  getCurrencies: () => {
-    dispatch(getCurrencies())
-  },
-  getCurrencyRate: (currency) => {
-    dispatch(getCurrencyRate())
-  },
-  currencyChange: (payload) => {
-    dispatch(currencyChange(payload))
-  },
-  dateChange: (payload) => {
-    dispatch(startDateChange(payload.startDate))
-    dispatch(endDateChange(payload.endDate))
-  },
-  favoriteAction: () => {
-    dispatch(currencyFavorite())
-  },
-  dialogueOpen: () => {
-    dispatch(favoriteDialogueChange(true))
-  },
-  dialogueClose: () => {
-    dispatch(favoriteDialogueChange(false))
-  },
-  removeFavorite: (currency) => {
-    dispatch(removeFavorite(currency))
-  },
-  removeAllFavoriteCurrency: () => {
-    dispatch(removeAllFavorite())
-  }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Currency)
+export default Currency

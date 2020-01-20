@@ -121,34 +121,24 @@ export const removeAllFavorite = () => async (dispatch) => {
 }
 
 /**
- * @description Action responsible for active currency change
- * @param payload
- * @returns {Function}
- */
-export const currencyChange = (payload) => async (dispatch) => {
-  dispatch({
-    type: ACTIVE_CURRENCY,
-    payload: payload
-  })
-  getCurrencyRate()
-}
-
-/**
  *
  * @description Action responsible for fetching all available currencies
  * @returns {Function}
  */
-export const getCurrencies = () => async (dispatch, getState) => {
-  try {
+export function getCurrencies() {
+  return function action(dispatch, getState) {
     const fromDate = getState().currency.rateFromDate.format('YYYY-MM-DD')
     const toDate = getState().currency.rateToDate.format('YYYY-MM-DD')
-    const { data } = await fetchCurrencies(fromDate, toDate)
-    dispatch({
-      type: FETCH_CURRENCY,
-      payload: data[0]
-    })
-  } catch (error) {
-    dispatch(handleError(error))
+
+    const request = fetchCurrencies(fromDate, toDate)
+    return request.then(
+      (response) =>
+        dispatch({
+          type: FETCH_CURRENCY,
+          payload: response.data[0]
+        }),
+      (err) => dispatch(handleError(err))
+    )
   }
 }
 
@@ -156,23 +146,30 @@ export const getCurrencies = () => async (dispatch, getState) => {
  * @description Action responsible for fetching rates of active currency
  * @returns {Function}
  */
-export const getCurrencyRate = () => async (dispatch, getState) => {
-  try {
-    let currency = getState().currency.activeCurrency
+export function getCurrencyRate(currency) {
+  return function action(dispatch, getState) {
+    dispatch({
+      type: ACTIVE_CURRENCY,
+      payload: currency || getState().currency.activeCurrency
+    })
+
     let fromDate = getState().currency.rateFromDate.format('YYYY-MM-DD')
     let toDate = getState().currency.rateToDate.format('YYYY-MM-DD')
-
     if (fromDate == null && toDate == null) return null
+
+    const request = fetchCurrencyRate(currency, fromDate, toDate)
+
     dispatch({
       type: IS_LOADING_CURRENCY_RATE,
       payload: true
     })
-    const { data } = await fetchCurrencyRate(currency, fromDate, toDate)
-    dispatch({
-      type: FETCH_CURRENCY_RATE,
-      payload: data
-    })
-  } catch (error) {
-    dispatch(handleError(error))
+    return request.then(
+      (response) =>
+        dispatch({
+          type: FETCH_CURRENCY_RATE,
+          payload: response.data
+        }),
+      (err) => dispatch(handleError(err))
+    )
   }
 }

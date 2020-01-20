@@ -6,7 +6,7 @@ import moment from 'moment'
 const initialState = {
   currency: {
     currencyList: {
-      data: {},
+      rates: {},
       error: ''
     },
     rate: {
