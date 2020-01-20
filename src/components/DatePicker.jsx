@@ -70,7 +70,7 @@ const defaultProps = {
   withPortal: false,
   withFullScreenPortal: false,
   initialVisibleMonth: null,
-  numberOfMonths: 2,
+  numberOfMonths: 1,
   keepOpenOnDateSelect: false,
   reopenPickerOnClearDates: false,
   isRTL: false,

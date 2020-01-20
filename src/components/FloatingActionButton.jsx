@@ -3,7 +3,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Zoom from '@material-ui/core/Zoom'
 import Fab from '@material-ui/core/Fab'
-import StarIcon from '@material-ui/icons/Star'
+import Favorite from '@material-ui/icons/Favorite'
 
 import { green } from '@material-ui/core/colors'
 
@@ -58,7 +58,7 @@ export default function FloatingActionButtonZoom(props) {
             className={classes.fab}
             color={'primary'}
           >
-            <StarIcon />
+            <Favorite />
           </Fab>
         </Zoom>
     </div>
