@@ -33,3 +33,7 @@ code {
 .DayPickerKeyboardShortcuts_show__bottomRight::before {
   border-right: 33px solid #6472c4 !important;
 }
+
+.MuiFab-primary {
+  z-index: 1000 !important;
+}
