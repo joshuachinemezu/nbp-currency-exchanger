@@ -1,68 +1,52 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">
+  	 Currnecy Exchange Rate Tracker
+</h1>
 
-## Available Scripts
+<p align="center">
+   <img alt="dependencies" title="dependencies" src="https://img.shields.io/github/last-commit/joshuachinemezu/nbp-currency-exchanger.svg" >
+   
+</p>
 
-In the project directory, you can run:
+<p align="center">
+  <b>Get Updated currency rate</b></br>
+  <b>✨ React and redux app using <a href="http://api.nbp.pl/">Narodowy Bank Exchange API</a> ✨<b>
+  </br>
+ </br>
+  <img src="public/exchanger.gif" alt="Currnecy Converter" />
+  </br> 
+</p>
 
-### `yarn start`
+<p align="center">
+  <br><b>Currency Exchange Rate Tracker </b> is a react application using latest web technologies<br>
+   <b>💥React, redux and material ui 💥</b>
+</p>
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installation
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Clone the repository `git clone https://github.com/joshuachinemezu/nbp-currency-exchanger.git`
+- Run `yarn install` or `npm install`
+- Rename the file `.env.example` to `.env` file using the cmd `mv .env.example .env`
+- To start app `yarn start`
+- For testing `yarn test`
 
-### `yarn test`
+## Build
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `yarn build`
 
-### `yarn build`
+## Technologies
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React
+- Redux
+- Axios
+- Styled component
+- Material UI
+- Moment
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Contributions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Spread the word
+- Open pull requests
 
-### `yarn eject`
+## License
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+MIT © [Joshua Chinemezu](https://github.com/joshuachinemezu)
