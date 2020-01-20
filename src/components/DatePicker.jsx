@@ -21,7 +21,6 @@ import {
 // import isInclusivelyAfterDay from 'react-dates';
 
 const propTypes = {
-  // example props for the demo
   autoFocus: PropTypes.bool,
   autoFocusEndDate: PropTypes.bool,
   stateDateWrapper: PropTypes.func,
@@ -39,7 +38,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  // example props for the demo
   autoFocus: false,
   autoFocusEndDate: false,
   initialStartDate: null,
@@ -138,8 +136,6 @@ class DateRangePickerWrapper extends React.Component {
     const { focusedInput, startDate, endDate } = this.state;
 
     // autoFocus, autoFocusEndDate, initialStartDate and initialEndDate are helper props for the
-    // example wrapper but are not props on the SingleDatePicker itself and
-    // thus, have to be omitted.
     const props = omit(this.props, [
       'autoFocus',
       'autoFocusEndDate',

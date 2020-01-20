@@ -115,9 +115,9 @@ function Currency({
                     initialStartDate={rateFromDate}
                     startDate={rateFromDate}
                     endDate={rateToDate}
-                    startDateId='your_unique_st2342342art_date_id'
+                    startDateId='unique_st2342342art_date_id'
                     initialEndDate={rateToDate}
-                    endDateId='your_unique_end_dedd3423date_id'
+                    endDateId='unique_end_dedd3423date_id'
                     onStartEndChange={({ startDate, endDate }) =>
                       dateChange({ startDate, endDate })
                     }

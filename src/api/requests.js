@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-// Node API KEY
 const EXCHANGER_API_URL = process.env.REACT_APP_EXCHANGER_API_URL
 const DESIRED_TABLE = 'c'
 

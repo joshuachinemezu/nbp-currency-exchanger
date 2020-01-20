@@ -84,6 +84,7 @@ export const currencyFavorite = () => async (dispatch, getState) => {
 
 /**
  * @description Action responsible for removing currency favorites
+ * @param currency
  * @returns {Function}
  *
  */
@@ -120,6 +121,7 @@ export const removeAllFavorite = () => async (dispatch) => {
 }
 
 /**
+ * @description Action responsible for active currency change
  * @param payload
  * @returns {Function}
  */
@@ -133,6 +135,7 @@ export const currencyChange = (payload) => async (dispatch) => {
 
 /**
  *
+ * @description Action responsible for fetching all available currencies
  * @returns {Function}
  */
 export const getCurrencies = () => async (dispatch, getState) => {
@@ -150,6 +153,7 @@ export const getCurrencies = () => async (dispatch, getState) => {
 }
 
 /**
+ * @description Action responsible for fetching rates of active currency
  * @returns {Function}
  */
 export const getCurrencyRate = () => async (dispatch, getState) => {
