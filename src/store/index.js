@@ -16,8 +16,8 @@ const initialState = {
     activeCurrency: 'EUR',
     isCurrencyLoaded: false,
     isRateFetched: false,
-    rateFromDate: moment().subtract(3, 'days'),
-    rateToDate: moment().subtract(2, 'days'),
+    rateFromDate: moment().subtract(15, 'days'),
+    rateToDate: moment().subtract(10, 'days'),
     currencyFavorites: JSON.parse(localStorage.getItem('favorites')) || [],
     favoriteDialogue: false
   }
